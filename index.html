@@ -47,10 +47,13 @@
                             <div className="space-y-6">
                                 <div className="flex justify-between items-center bg-gray-700 p-4 rounded-lg">
                                     <span className="text-gray-400">Baht to Kyat</span>
-                                    <span className="text-xl font-bold text-white">{rateData.buy}</span>
-                                    <span className="text-xl font-bold text-yellow-500">
-                                      {(100000 / rateData.buy).toFixed(2)}
-                                    </span>
+                                    <span className="text-xl font-bol text-yellow-500">{rateData.buy}</span>
+
+                                    <div className="flex justify-between items-center bg-gray-700 p-4 rounded-lg">
+                                        <span className="text-xl font-bold text-yellow-500">
+                                            {(100000 / rateData.buy).toFixed(2)}
+                                        </span>
+                                    </div>
                                 </div>
                                 <div className="flex justify-between items-center bg-gray-700 p-4 rounded-lg border border-yellow-500/30">
                                     <span className="text-gray-400">Kyat to Baht</span>
