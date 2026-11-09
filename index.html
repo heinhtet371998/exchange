@@ -30,18 +30,18 @@
 
         // Calculate displayed exchange rates
         const kyatToBahtRate = rateData
-            ? (100000 / rateData.sell) + 1
+            ? (100000/((100000/rateData.sell)+1))
             : 0;
 
         const bahtToKyatRate = rateData
-            ? (100000 / rateData.buy) - 1
+            ? (100000/((100000/rateData.buy)-1))
             : 0;
 
 
         const selectedRate =
             calcDirection === "MMK_TO_THB"
-                ? kyatToBahtRate
-                : bahtToKyatRate;
+                ? 100000/kyatToBahtRate
+                : 100000/bahtToKyatRate;
 
 
         // MMK input handler
@@ -60,7 +60,8 @@
                 return;
             }
 
-            setThbAmount((amount / selectedRate.toFixed(2)).toFixed(0));
+            //setThbAmount((amount / selectedRate.toFixed(2)).toFixed(2));
+            setThbAmount((Math.floor((amount / selectedRate) * 100) / 100).toFixed(2));
         };
 
 
@@ -80,7 +81,8 @@
                 return;
             }
 
-            setMmkAmount((amount * selectedRate.toFixed(2)).toFixed(0));
+            //setMmkAmount((amount / selectedRate.toFixed(2)).toFixed(0));
+            setMmkAmount(Math.floor((amount / (Math.floor((100000 / ((100000 / rateData.sell) + 1)) * 100) / 100)) * 100000));
         };
 
 
@@ -114,13 +116,13 @@
                             <div className="flex justify-between items-center bg-gray-700 p-4 rounded-lg border border-yellow-500/30">
                                 <span className="text-gray-400">Kyat to Baht</span>
                                 <span className="text-xl font-bold text-green-500">
-                                            {((100000 / rateData.sell)+1).toFixed(2)}
+                                    {(Math.floor((100000 / ((100000 / rateData.sell) + 1)) * 100) / 100).toFixed(2)}
                                         </span>
                             </div>
                             <div className="flex justify-between items-center bg-gray-700 p-4 rounded-lg border border-yellow-500/30">
                                 <span className="text-gray-400">Baht to Kyat</span>
                                 <span className="text-xl font-bold text-red-500">
-                                      {((100000 / rateData.buy)-1).toFixed(2)}
+                                      {(Math.floor((100000/((100000/rateData.buy)-1))*100)/100).toFixed(2)}
                                     </span>
                             </div>
                             <div className="text-xs text-gray-500 text-center mt-4">
@@ -244,8 +246,8 @@
 
                                     Selected Rate: {
                                     calcDirection === "MMK_TO_THB"
-                                        ? kyatToBahtRate.toFixed(2)
-                                        : bahtToKyatRate.toFixed(2)
+                                        ? (Math.floor(kyatToBahtRate * 100) / 100).toFixed(2)
+                                        : (Math.floor(BahtToKyatRate * 100) / 100).toFixed(2)
                                 }
 
                                 </div>
