@@ -59,8 +59,6 @@
                 setThbAmount("");
                 return;
             }
-
-            //setThbAmount((amount / selectedRate.toFixed(2)).toFixed(2));
             setThbAmount((Math.floor((amount / selectedRate) * 100) / 100).toFixed(2));
         };
 
@@ -80,8 +78,6 @@
                 setMmkAmount("");
                 return;
             }
-
-            //setMmkAmount((amount / selectedRate.toFixed(2)).toFixed(0));
             setMmkAmount(Math.floor((amount / (Math.floor((100000 / ((100000 / rateData.sell) + 1)) * 100) / 100)) * 100000));
         };
 
